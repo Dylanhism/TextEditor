@@ -15,7 +15,6 @@ class menuClass(Tk):
 		self.yscrollbar = Scrollbar(self, orient=VERTICAL, command=self.lb.yview)
 		self.yscrollbar.pack(side=RIGHT, fill=Y)
 		self.lb["yscrollcommand"] = self.yscrollbar.set 
-	#def menus(self):
 		menubar = Menu(self)
 		filemenu = Menu(menubar, tearoff =0)
 		filemenu.add_command(label="New", command= lambda : self.donothing())
