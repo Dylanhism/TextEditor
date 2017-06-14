@@ -36,11 +36,22 @@ class Texty(object):
 		lb["yscrollcommand"]=yscrollbar.set
 root = Tk()
 
+## comment these out when adding them to code
 bold = False
 italics = False
 underlines = False
 familyFont = "arial"
 textSize = 50
+#Font names
+##Times
+##arial
+##courier
+##comic sans ms
+##fixedsys
+##ms sans serif
+##ms serif
+##symbol
+
 
 
 
