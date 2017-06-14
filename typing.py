@@ -18,41 +18,41 @@ class menuClass(Tk):
 	#def menus(self):
 		menubar = Menu(self)
 		filemenu = Menu(menubar, tearoff =0)
-		filemenu.add_command(label="New", command= lambda : donothing())
-		filemenu.add_command(label="Open", command=lambda:donothing())
-		filemenu.add_command(label="Save", command=lambda:donothing())
-		filemenu.add_command(label="Save as...", command=lambda:donothing())
+		filemenu.add_command(label="New", command= lambda : self.donothing())
+		filemenu.add_command(label="Open", command=lambda:self.donothing())
+		filemenu.add_command(label="Save", command=lambda:self.donothing())
+		filemenu.add_command(label="Save as...", command=lambda:self.donothing())
 	
 		filemenu.add_separator()
 		filemenu.add_command(label="Exit", command=Tk.quit)
 		
 		menubar.add_cascade(label="File", menu=filemenu)
 		editmenu = Menu(menubar, tearoff=0)
-		editmenu.add_command(label="Undo", command=lambda:donothing())
+		editmenu.add_command(label="Undo", command=lambda:self.donothing())
 	
 		editmenu.add_separator()
 	
-		editmenu.add_command(label="Cut", command=lambda:donothing())
+		editmenu.add_command(label="Cut", command=lambda:self.donothing())
 		editmenu.add_command(label="Copy", command=lambda:self.copy())
 		editmenu.add_command(label="Paste", command=lambda:self.paste())
-		editmenu.add_command(label="Delete", command=lambda:donothing())
-		editmenu.add_command(label="Select All", command=lambda:donothing())
+		editmenu.add_command(label="Delete", command=lambda:self.delete())
+		editmenu.add_command(label="Select All", command=lambda:self.donothing())
 	
 		formatmenu = Menu(menubar, tearoff=0)
-		formatmenu.add_command(label="Tab", command=lambda:donothing())
+		formatmenu.add_command(label="Tab", command=lambda:self.donothing())
 	
 		menubar.add_cascade(label="Edit", menu=editmenu)
 		helpmenu = Menu(menubar, tearoff=0)
-		helpmenu.add_command(label="Help Index", command=lambda:donothing())
-		helpmenu.add_command(label="About...", command=lambda:donothing())
+		helpmenu.add_command(label="Help Index", command=lambda:self.donothing())
+		helpmenu.add_command(label="About...", command=lambda:self.donothing())
 		menubar.add_cascade(label="Help", menu=helpmenu)
 		menubar.add_cascade(label="Format", menu=formatmenu)
 			
 		Testframe = Frame(self)
 		Testframe.pack()
-		B = Button(Testframe, text ="B", width = 1, padx = -4, command = lambda:donothing())
-		U = Button(Testframe, text ="U", width = 1, padx = -4, command = lambda:donothing())
-		I = Button(Testframe, text ="I", width = 1, padx = -4, command = lambda:donothing())
+		B = Button(Testframe, text ="B", width = 1, padx = -4, command = lambda:self.donothing())
+		U = Button(Testframe, text ="U", width = 1, padx = -4, command = lambda:self.donothing())
+		I = Button(Testframe, text ="I", width = 1, padx = -4, command = lambda:self.donothing())
 	
 		I.pack(side = TOP, fill = X)#grid(row = 0, column = 0) #Displays the button with a position 0, 0
 		U.pack(side = TOP, fill = X)#grid(row = 0, column = 1) #Row is verticle position, column is horizontal
@@ -66,9 +66,11 @@ class menuClass(Tk):
 		
 	content = ""
 	def copy(self):
-		global content
-		content = self.lb.get(SEL_FIRST, SEL_LAST)
-		print content
+		self.withdraw()
+		self.clipboard_clear()
+		start = self.lb.index('sel.first')
+		end = self.lb.index('sel.last')
+		self.clipboard_append(start, end)
 	def paste(self):
 		# get the clipboard data, and replace all newlines
 		# with the literal string "\n"
@@ -77,16 +79,21 @@ class menuClass(Tk):
 		
 		# delete the selected text, if any
 		try:
-			start = self.text.index('sel.first')
-			end = self.text.index('sel.last')
-			self.text.delete(start, end)
+			start = self.lb.index('sel.first')
+			end = self.lb.index('sel.last')
+			self.lb.delete(start, end)
 		except TclError, e:
-			# nothing was selected, so paste doesn't need
-			# to delete anything
-			pass
+			pass #nothing was selected, so paste doesn't need to delete anything
 		
 		# insert the modified clipboard contents
 		self.lb.insert("insert", clipboard)
+	def delete(self):
+		try:
+			start = self.lb.index("sel.first")
+			end = self.lb.index("sel.last")
+			self.lb.delete(start, end)
+		except TclError, e:
+			pass
 
 if __name__ == "__main__":
     app = menuClass()
