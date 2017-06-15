@@ -9,7 +9,22 @@ import tkFont
 class menuClass(Tk):
 	def __init__(self, *args, **kwargs):
 		Tk.__init__(self, *args, **kwargs)
-		self.dFont = tkFont.Font(family = "Helvetica", size=10)
+		if (bold == True and italics == False and underlines == False):
+			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold')
+		elif (bold == False and italics == True and underlines == False):
+			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic')
+		elif (bold == False and italics == False and underlines == True):
+			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, underline = True)
+		elif (bold == True and italics == True and underlines == False):
+			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', slant = 'italic')
+		elif (bold == False and italics == True and underlines == True):
+			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic', underline = True)
+		elif (bold == True and italics == False and underlines == True):
+			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', underline = True)
+		elif (bold == True and italics == True and underlines == True):
+			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', slant = 'italic', underline = True)
+		elif (bold == False and italics == False and underlines == False):
+			dFont = tkFont.Font(family = self.familyFont, size = self.textSize)
 		self.lb = Text(self, width=16, height=5, font=self.dFont)
 		self.lb.pack(side = LEFT, fill=BOTH, expand = YES)
 		self.yscrollbar = Scrollbar(self, orient=VERTICAL, command=self.lb.yview)
