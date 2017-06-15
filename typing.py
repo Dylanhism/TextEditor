@@ -120,33 +120,40 @@ class menuClass(Tk):
 	def underlines(self):
 		if self.underlined == False:
 			self.underlined = True
-			print str(self.underlined)
+			#print str(self.underlined)
 			self.conditions()
 		elif self.underlined == True:
 			self.underlined = False
-			print str(self.underlined)
+			#print str(self.underlined)
 			self.conditions()
 			
 	def conditions(self):
 		if (self.bold == True and self.italics == False and self.underlined == False):
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold')
+			aFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold')
+			self.lb = Text(self, width=16, height=5, font = aFont)
 		elif (self.bold == False and self.italics == True and self.underlined == False):
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic')
+			bFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic')
+			self.lb = Text(self, width=16, height=5, font = bFont)
 		elif (self.bold == False and self.italics == False and self.underlined == True):
 			print "It's working!"
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, underline = True)
+			cFont = tkFont.Font(family = self.familyFont, size = self.textSize, underline = True)
+			self.lb = Text(self, width=16, height=5, font = cFont)
 		elif (self.bold == True and self.italics == True and self.underlined == False):
 			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', slant = 'italic')
+			self.lb = Text(self, width=16, height=5, font = dFont)
 		elif (self.bold == False and self.italics == True and self.underlined == True):
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic', underline = True)
+			eFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic', underline = True)
+			self.lb = Text(self, width=16, height=5, font = eFont)
 		elif (self.bold == True and self.italics == False and self.underlined == True):
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', underline = True)
+			fFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', underline = True)
+			self.lb = Text(self, width=16, height=5, font = fFont)
 		elif (self.bold == True and self.italics == True and self.underlined == True):
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', slant = 'italic', underline = True)
+			gFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', slant = 'italic', underline = True)
+			self.lb = Text(self, width=16, height=5, font = gFont)
 		elif (self.bold == False and self.italics == False and self.underlined == False):
 			print "Testing woot"
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize)
-		self.lb = Text(self, width=16, height=5, font = dFont)
+			hFont = tkFont.Font(family = self.familyFont, size = self.textSize)
+			self.lb = Text(self, width=16, height=5, font = hFont)
 if __name__ == "__main__":
     app = menuClass()
     #menuClass().conditions()
