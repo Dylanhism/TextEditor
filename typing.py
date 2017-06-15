@@ -5,26 +5,35 @@ import tkFont
 #Testframe = Frame(root)
 #Testframe.pack()
 ## defines the typing function so as the user can type into the program
+#bold = False
+#underlined = False
+#italics = False
 
 class menuClass(Tk):
 	def __init__(self, *args, **kwargs):
 		Tk.__init__(self, *args, **kwargs)
-		if (bold == True and italics == False and underlines == False):
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold')
-		elif (bold == False and italics == True and underlines == False):
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic')
-		elif (bold == False and italics == False and underlines == True):
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, underline = True)
-		elif (bold == True and italics == True and underlines == False):
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', slant = 'italic')
-		elif (bold == False and italics == True and underlines == True):
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic', underline = True)
-		elif (bold == True and italics == False and underlines == True):
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', underline = True)
-		elif (bold == True and italics == True and underlines == True):
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', slant = 'italic', underline = True)
-		elif (bold == False and italics == False and underlines == False):
-			dFont = tkFont.Font(family = self.familyFont, size = self.textSize)
+		self.bold = False
+		self.underlined = False
+		self.italics = False
+		self.familyFont = "arial"
+		self.textSize = 18
+		if (self.bold == True and self.italics == False and self.underlined == False):
+			self.dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold')
+		elif (self.bold == False and self.italics == True and self.underlined == False):
+			self.dFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic')
+		elif (self.bold == False and self.italics == False and self.underlined == True):
+			self.dFont = tkFont.Font(family = self.familyFont, size = self.textSize, underline = True)
+		elif (self.bold == True and self.italics == True and self.underlined == False):
+			self.dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', slant = 'italic')
+		elif (self.bold == False and self.italics == True and self.underlined == True):
+			self.dFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic', underline = True)
+		elif (self.bold == True and self.italics == False and self.underlined == True):
+			self.dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', underline = True)
+		elif (self.bold == True and self.italics == True and self.underlined == True):
+			self.dFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', slant = 'italic', underline = True)
+		elif (self.bold == False and self.italics == False and self.underlined == False):
+			self.dFont = tkFont.Font(family = self.familyFont, size = self.textSize)
+		#self.dFont = tkFont.Font(family = "Helvetica", size=10)
 		self.lb = Text(self, width=16, height=5, font=self.dFont)
 		self.lb.pack(side = LEFT, fill=BOTH, expand = YES)
 		self.yscrollbar = Scrollbar(self, orient=VERTICAL, command=self.lb.yview)
@@ -64,9 +73,9 @@ class menuClass(Tk):
 			
 		Testframe = Frame(self)
 		Testframe.pack()
-		B = Button(Testframe, text ="B", width = 1, padx = -4, command = lambda:self.donothing())
-		U = Button(Testframe, text ="U", width = 1, padx = -4, command = lambda:self.donothing())
-		I = Button(Testframe, text ="I", width = 1, padx = -4, command = lambda:self.donothing())
+		B = Button(Testframe, text ="B", width = 1, padx = -4, command = lambda:self.bolded())
+		U = Button(Testframe, text ="U", width = 1, padx = -4, command = lambda:self.underlined())
+		I = Button(Testframe, text ="I", width = 1, padx = -4, command = lambda:self.intalicised())
 	
 		I.pack(side = TOP, fill = X)#grid(row = 0, column = 0) #Displays the button with a position 0, 0
 		U.pack(side = TOP, fill = X)#grid(row = 0, column = 1) #Row is verticle position, column is horizontal
@@ -80,11 +89,11 @@ class menuClass(Tk):
 		
 	content = ""
 	def copy(self):
-		self.withdraw()
 		self.clipboard_clear()
 		start = self.lb.index('sel.first')
 		end = self.lb.index('sel.last')
-		self.clipboard_append(start, end)
+		textCopy = self.lb.get(start, end)
+		self.clipboard_append(textCopy)
 	def paste(self):
 		# get the clipboard data, and replace all newlines
 		# with the literal string "\n"
@@ -108,6 +117,21 @@ class menuClass(Tk):
 			self.lb.delete(start, end)
 		except TclError, e:
 			pass
+	def bolded(self):
+		if self.bold == False:
+			self.bold = True
+		elif self.bold == True:
+			self.bold = False
+	def intalicised(self):
+		if self.italics == False:
+			self.italics = True
+		elif self.italics == True:
+			self.italics = False
+	def underlined(self):
+		if self.underlined == False:
+			self.underlined = True
+		elif self.underlined == True:
+			self.underlined = False
 
 if __name__ == "__main__":
     app = menuClass()
