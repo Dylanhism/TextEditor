@@ -8,4 +8,4 @@ def save_as_file():
 
 	text2save = str(text.get(1.0, END))
 	name.write(text2save)
-	f.close()
+	name.close()
