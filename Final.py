@@ -33,7 +33,7 @@ class menuClass(Tk):
 		menubar = Menu(self)
 		filemenu = Menu(menubar, tearoff =0)
 		filemenu.add_command(label="New", command= lambda : self.donothing())
-		filemenu.add_command(label="Open", command=lambda:self.donothing())
+		filemenu.add_command(label="Open", command=lambda:self.fileStuff())
 		filemenu.add_command(label="Save", command=lambda:self.donothing())
 		filemenu.add_command(label="Save as...", command=lambda:self.donothing())
 	
@@ -129,6 +129,23 @@ class menuClass(Tk):
 			self.underlined = False
 			#print str(self.underlined)
 			#self.conditions()
+					       
+	def fileStuff (self):
+                self.newroot = Tk()
+                tWlabel = Label(self.newroot, text= "Please enter your file name exaclty and press done")
+                tWlabel.pack()
+                self.tW = Text(self.newroot, height=1, width=50)
+                self.tW.pack()
+                twButton = Button(self.newroot, text="Done", command = lambda:self.filePaste())
+                twButton.pack()
+
+        def filePaste (self):
+                self.filename = self.tW.get(1.0, END)
+                self.filename = self.filename[:-1]
+                data_file = open(self.filename)
+                data = data_file.read()
+                self.lb.insert(END, data)
+                self.newroot.destroy()
 			
 	def conditions(self):
 		if (self.bold == True and self.italics == False and self.underlined == False):
