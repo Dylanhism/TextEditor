@@ -28,7 +28,7 @@ class menuClass(Tk):
 		
 		self.boldFont = tkFont.Font(family="arial", size=18, weight="bold")
 		self.lb.tag_configure("BOLD", font=self.boldFont)
-		self.italicsFont = tkFont.Font(family ="arial", size = 18, slant = 'italic'
+		self.italicsFont = tkFont.Font(family ="arial", size = 18, slant = 'italic')
 		
 		menubar = Menu(self)
 		filemenu = Menu(menubar, tearoff =0)
