@@ -9,25 +9,25 @@ import tkFont
 #underlined = False
 #italics = False
 
-class menuClass(Tk):
-    def __init__(self, *args, **kwargs):
-        Tk.__init__(self, *args, **kwargs)
-        self.bold = False
+class menuClass(Tk): #Creating the main class, to be accessed from anywhere
+    def __init__(self, *args, **kwargs): #Main function of the main class, variables set aself.[variablename]
+        Tk.__init__(self, *args, **kwargs) #will be acessible throughout the entire main class
+        self.bold = False #setting variables for entire class
         self.underlined = False
         self.italics = False
         self.clearText = False
         self.familyFont = "arial"
         self.textSize = 18
-        self.dFont = tkFont.Font(family = self.familyFont, size = self.textSize)
-        self.lb = Text(self, width=16, height=5, font = self.dFont)
-        self.lb.pack(side = LEFT, fill=BOTH, expand = YES)
-        self.yscrollbar = Scrollbar(self, orient=VERTICAL, command=self.lb.yview)
-        self.yscrollbar.pack(side=RIGHT, fill=Y)
+        self.dFont = tkFont.Font(family = self.familyFont, size = self.textSize) # setting text attributes using tkFont 
+        self.lb = Text(self, width=16, height=5, font = self.dFont) # setting up the text editting window
+        self.lb.pack(side = LEFT, fill=BOTH, expand = YES) #actually starting up the text editting window
+        self.yscrollbar = Scrollbar(self, orient=VERTICAL, command=self.lb.yview) #setting up the scrollbar
+        self.yscrollbar.pack(side=RIGHT, fill=Y) #starts up scrollbar in lb (text edit window)
         self.lb["yscrollcommand"] = self.yscrollbar.set 
         
-        self.boldFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = "bold")
-        self.lb.tag_configure("BOLD", font = self.boldFont)
-        self.italicsFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic')
+        self.boldFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = "bold")    #setting and configuring variables
+        self.lb.tag_configure("BOLD", font = self.boldFont)                                             #call certain font aspects much easier
+        self.italicsFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic')#in the entire main class
         self.lb.tag_configure("ITALICS", font = self.italicsFont)
         self.underlineFont = tkFont.Font(family = self.familyFont, size = self.textSize, underline = True)
         self.lb.tag_configure("UNDERLINE", font = self.underlineFont)
@@ -41,7 +41,7 @@ class menuClass(Tk):
         self.lb.tag_configure("ALLFONT", font = self.allFont)
         
         
-        menubar = Menu(self)
+        menubar = Menu(self) #Sets up accessing the top menubar
         filemenu = Menu(menubar, tearoff =0)
         filemenu.add_command(label="New", command= lambda : self.donothing())
         filemenu.add_command(label="Open", command=lambda:self.donothing())
