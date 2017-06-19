@@ -1,125 +1,112 @@
-from Tkinter import *
+from Tkinter import * #getting the tkinter library by importing all from it.
 import tkFont
 ## imports tk file dialog which allows you to access different file options such as save and open
 import tkFileDialog
 
-class menuClass(Tk):
-    def __init__(self, *args, **kwargs):
-        Tk.__init__(self, *args, **kwargs)
-        self.bold = False
-        self.underlined = False
-        self.italics = False
-        self.clearText = False
-        self.familyFont = "arial"
-        self.textSize = 18
-        self.dFont = tkFont.Font(family = self.familyFont, size = self.textSize)
-        self.lb = Text(self, width=16, height=5, font = self.dFont)
-        self.lb.pack(side = LEFT, fill=BOTH, expand = YES)
-        self.yscrollbar = Scrollbar(self, orient=VERTICAL, command=self.lb.yview)
-        self.yscrollbar.pack(side=RIGHT, fill=Y)
-        self.lb["yscrollcommand"] = self.yscrollbar.set 
-        
-        self.boldFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = "bold")
-        self.lb.tag_configure("BOLD", font = self.boldFont)
-        self.italicsFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic')
-        self.lb.tag_configure("ITALICS", font = self.italicsFont)
-        self.underlineFont = tkFont.Font(family = self.familyFont, size = self.textSize, underline = True)
-        self.lb.tag_configure("UNDERLINE", font = self.underlineFont)
-        self.boldItalics = tkFont.Font(family=self.familyFont, size=self.textSize, weight = 'bold', slant = 'italic')
-        self.lb.tag_configure("BOLDITALICS", font = self.boldItalics)
-        self.boldUnder = tkFont.Font(family=self.familyFont, size=self.textSize, weight = 'bold', underline = True)
-        self.lb.tag_configure("BOLDUNDER", font = self.boldUnder)
-        self.italicsUnder = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic', underline = True)
-        self.lb.tag_configure("ITALICSUNDER", font = self.italicsUnder)
-        self.allFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', slant = 'italic', underline = True)
-        self.lb.tag_configure("ALLFONT", font = self.allFont)
-        
-        
-        menubar = Menu(self)
-        filemenu = Menu(menubar, tearoff =0)
-        filemenu.add_command(label="New", command= lambda : self.newFile())
-        filemenu.add_command(label="Open", command=lambda:self.fileStuff())
-        filemenu.add_command(label="Save", command=lambda:self.save_as_file())
-        filemenu.add_command(label="Save as...", command=lambda:self.save_as_file())
-
-        filemenu.add_separator()
-        filemenu.add_command(label="Exit", command=self.quit)
-        
-        menubar.add_cascade(label="File", menu=filemenu)
-        editmenu = Menu(menubar, tearoff=0)
-
-        editmenu.add_separator()
-
-        editmenu.add_command(label="Cut", command=lambda:self.cut())
-        editmenu.add_command(label="Copy", command=lambda:self.copy())
-        editmenu.add_command(label="Paste", command=lambda:self.paste())
-        editmenu.add_command(label="Delete", command=lambda:self.delete())
-
-        formatmenu = Menu(menubar, tearoff=0)
-        formatmenu.add_command(label="8", command=lambda:self.getSize(8))
-
-        menubar.add_cascade(label="Edit", menu=editmenu)
-        helpmenu = Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="Format", menu=formatmenu)
-        
-        
-        filemenu.add_separator()
-
-        fontsmenu = Menu(menubar, tearoff = 0)
-        menubar.add_cascade(label = "fonts", menu = fontsmenu)
-
-        fontsmenu.add_command(label = "Arial", command = lambda:donothing())
-        fontsmenu.add_command(label = "Times New Roman", command = lambda:donothing())
-        fontsmenu.add_command(label = "Helvetica", command = lambda:donothing())
-
-	filemenu.add_separator()
-
-	sizesmenu = Menu(menubar, tearoff = 0)
-	menubar.add_cascade(label = "sizes", menu = sizesmenu)
-
-	sizesmenu.add_command(label = "8", command = lambda:donothing())
-	sizesmenu.add_command(label = "9", command = lambda:donothing())
-	sizesmenu.add_command(label = "10", command = lambda:donothing())
-	sizesmenu.add_command(label = "11", command = lambda:donothing())
-	sizesmenu.add_command(label = "12", command = lambda:donothing())
-	sizesmenu.add_command(label = "14", command = lambda:donothing())
-	sizesmenu.add_command(label = "18", command = lambda:donothing())
-        sizesmenu.add_command(label = "24", command = lambda:donothing())
-        
-        
-        Testframe = Frame(self)
-        Testframe.pack()
-        B = Button(Testframe, text ="B", width = 1, padx = -4, command = lambda:self.bolded())
-        U = Button(Testframe, text ="U", width = 1, padx = -4, command = lambda:self.underlines())
-        I = Button(Testframe, text ="I", width = 1, padx = -4, command = lambda:self.intalicised())
-        BI =Button(Testframe, text="BI", width = 1, padx = -4, command = lambda:self.boldItalicsF())
-        IU =Button(Testframe, text="IU", width = 1, padx = -4, command = lambda:self.italicsUnderlined())
-        BU =Button(Testframe, text="BU", width = 1, padx = -4, command = lambda:self.boldUnderlined())
-        BUI=Button(Testframe, text="A",width = 1, padx = -4, command = lambda:self.allFormat())
-        x = Button(Testframe, text="X", width = 1, padx = -4, command = lambda:self.clear())
-
-        I.pack(side = TOP, fill = X)#grid(row = 0, column = 0) #Displays the button with a position 0, 0
-        U.pack(side = TOP, fill = X)#grid(row = 0, column = 1) #Row is verticle position, column is horizontal
-        B.pack(side = TOP, fill = X)#grid(row = 0, column = 2)
-        BI.pack(side = TOP)
-        BU.pack(side = TOP)
-        IU.pack(side = TOP)
-        BUI.pack(side = TOP)
-        x.pack(side = TOP)
-        self.config(menu=menubar)
-    
+class menuClass(Tk): #Creating the main class, to be accessed from anywhere
+    def __init__(self, *args, **kwargs): #Main function of the main class, variables set aself.[variablename]
+		Tk.__init__(self, *args, **kwargs) #will be acessible throughout the entire main class
+		self.bold = False #setting variables for entire class to check format of text
+		self.underlined = False
+		self.italics = False
+		self.clearText = False
+		self.familyFont = "arial"#sets the font for the text
+		self.textSize = 18#sets size of text
+		self.dFont = tkFont.Font(family = self.familyFont, size = self.textSize) # setting text attributes using tkFont 
+		self.lb = Text(self, width=16, height=5, font = self.dFont) # setting up the text editting window
+		self.lb.pack(side = LEFT, fill=BOTH, expand = YES) #actually starting up the text editting window
+		self.yscrollbar = Scrollbar(self, orient=VERTICAL, command=self.lb.yview) #setting up the scrollbar
+		self.yscrollbar.pack(side=RIGHT, fill=Y) #starts up scrollbar in lb (text edit window)
+		self.lb["yscrollcommand"] = self.yscrollbar.set 
+		
+		self.boldFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = "bold")#setting up different fonts for each bold/ format
+		self.lb.tag_configure("BOLD", font = self.boldFont)#this adds it to the text box to be able to enable or dissable it.
+		self.italicsFont = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic')#sets up each other format as to make it possible to call them.
+		self.lb.tag_configure("ITALICS", font = self.italicsFont)
+		self.underlineFont = tkFont.Font(family = self.familyFont, size = self.textSize, underline = True)
+		self.lb.tag_configure("UNDERLINE", font = self.underlineFont)
+		self.boldItalics = tkFont.Font(family=self.familyFont, size=self.textSize, weight = 'bold', slant = 'italic')
+		self.lb.tag_configure("BOLDITALICS", font = self.boldItalics)
+		self.boldUnder = tkFont.Font(family=self.familyFont, size=self.textSize, weight = 'bold', underline = True)
+		self.lb.tag_configure("BOLDUNDER", font = self.boldUnder)
+		self.italicsUnder = tkFont.Font(family = self.familyFont, size = self.textSize, slant = 'italic', underline = True)
+		self.lb.tag_configure("ITALICSUNDER", font = self.italicsUnder)
+		self.allFont = tkFont.Font(family = self.familyFont, size = self.textSize, weight = 'bold', slant = 'italic', underline = True)
+		self.lb.tag_configure("ALLFONT", font = self.allFont)
+		
+		
+		menubar = Menu(self)#set up a menu for all the options at the top.
+		filemenu = Menu(menubar, tearoff =0)
+		filemenu.add_command(label="New", command= lambda : self.newFile())#new option that selects all and deletes everything
+		filemenu.add_command(label="Open", command=lambda:self.fileStuff())#open option which allows the user to pick which file to open in a new window(runs fileStuff() function)
+		filemenu.add_command(label="Save as...", command=lambda:self.save_as_file())#save as options which prompts the user to pick the location and name of file.(runs save_as_file() function)
+		
+		filemenu.add_separator()#adds a spacing for the last options
+		filemenu.add_command(label="Exit", command=self.quit)#quit option which closes the text editor
+		
+		menubar.add_cascade(label="File", menu=filemenu)#Add a new dropdown menu that is called File.
+		editmenu = Menu(menubar, tearoff=0)
+		
+		editmenu.add_separator()
+		
+		editmenu.add_command(label="Cut", command=lambda:self.cut())#runs cut() which runs copy() then delete() for selected text to put the string into the clipboard.
+		editmenu.add_command(label="Copy", command=lambda:self.copy())#puts 'copy' text in edit which runs copy(). 
+		editmenu.add_command(label="Paste", command=lambda:self.paste())
+		editmenu.add_command(label="Delete", command=lambda:self.delete())
+		
+		formatmenu = Menu(menubar, tearoff=0)
+		formatmenu.add_command(label="8", command=lambda:self.getSize(8))
+		
+		menubar.add_cascade(label="Edit", menu=editmenu)
+		helpmenu = Menu(menubar, tearoff=0)
+		menubar.add_cascade(label="Format", menu=formatmenu)
+		
+		
+		sizesmenu = Menu(menubar, tearoff = 0)
+		menubar.add_cascade(label = "sizes", menu = sizesmenu)
+		
+		sizesmenu.add_command(label = "8", command = lambda:self.donothing())
+		sizesmenu.add_command(label = "9", command = lambda:self.donothing())
+		sizesmenu.add_command(label = "10", command = lambda:self.donothing())
+		sizesmenu.add_command(label = "11", command = lambda:self.donothing())
+		sizesmenu.add_command(label = "12", command = lambda:self.donothing())
+		sizesmenu.add_command(label = "14", command = lambda:self.donothing())
+		sizesmenu.add_command(label = "18", command = lambda:self.donothing())
+		sizesmenu.add_command(label = "24", command = lambda:self.donothing())
+				
+		Testframe = Frame(self)#sets up a frame to put the buttons on.
+		Testframe.pack()
+		B = Button(Testframe, text ="B", width = 1, padx = -4, command = lambda:self.bolded())#Sets up all the buttons for each format(bold/italics..)
+		U = Button(Testframe, text ="U", width = 1, padx = -4, command = lambda:self.underlines())
+		I = Button(Testframe, text ="I", width = 1, padx = -4, command = lambda:self.intalicised())
+		BI =Button(Testframe, text="BI", width = 1, padx = -4, command = lambda:self.boldItalicsF())
+		IU =Button(Testframe, text="IU", width = 1, padx = -4, command = lambda:self.italicsUnderlined())
+		BU =Button(Testframe, text="BU", width = 1, padx = -4, command = lambda:self.boldUnderlined())
+		BUI=Button(Testframe, text="A",width = 1, padx = -4, command = lambda:self.allFormat())
+		x = Button(Testframe, text="X", width = 1, padx = -4, command = lambda:self.clear())
+		
+		I.pack(side = TOP)
+		U.pack(side = TOP)#loading all the buttons onto the screen, this loads them in a certain order as well.
+		B.pack(side = TOP)
+		BI.pack(side = TOP)
+		BU.pack(side = TOP)
+		IU.pack(side = TOP)
+		BUI.pack(side = TOP)
+		x.pack(side = TOP)
+		self.config(menu=menubar)
+	
     def donothing(self):
-        filewin = Toplevel(root)
-        button = Button(filewin, text = "Coming in future updates!!")
+        filewin = Toplevel(self)
+        button = Button(filewin, text = "Coming soon!")
         button.pack()
-    def getSize(self, number):
+    def getSize(self, number):#would have been the function to change the size of the text. It doesn't work and we don't have time left.
         self.textSize = number
         print self.textSize
     content = ""
-    def cut(self):
+    def cut(self):#Cut funtion which runs copy() and then delete() for the selected text
         self.copy()
         self.delete()
-    def newFile(self):
+    def newFile(self):#newFile function which selects all and then deletes it.
         self.lb.delete('1.0', 'end')
     def copy(self):
         self.clipboard_clear()
@@ -182,10 +169,10 @@ class menuClass(Tk):
         self.newroot.destroy()
 
     
-    def bolded(self):
+    def bolded(self):#Each format function which choses which variable to turn true, then call conditions()
         self.bold = True
         self.conditions()
-        self.bold = False
+        self.bold = False#Then it turns all the corresponding variables false again.
     def intalicised(self):
         self.italics = True
         self.conditions()
@@ -225,16 +212,14 @@ class menuClass(Tk):
         self.italics = False
         self.underlined = False
     def conditions(self):
-        if (self.bold == True and self.italics == False and self.underlined == False):
-            try:
+        if (self.bold == True and self.italics == False and self.underlined == False):#conditions function which checks what variables are true
+            try:#then it adds the corresponding tag to the selected text and deletes the other tags that aren't needed.
                 self.lb.tag_add("BOLD", "sel.first", 'sel.last')
-                print self.lb.tag_names()
                 self.lb.tag_remove("ITALICS", "sel.first", 'sel.last')
                 self.lb.tag_remove("UNDERLINE", "sel.first", 'sel.last')
                 self.lb.tag_remove("BOLDUNDER", "sel.first", 'sel.last')
                 self.lb.tag_remove("BOLDITALICS", "sel.first", 'sel.last')
                 self.lb.tag_remove("ITALICSUNDER", "sel.first", 'sel.last')
-                #self.bold = False
             except TclError:
                 pass
         elif (self.bold == False and self.italics == True and self.underlined == False):
@@ -245,7 +230,6 @@ class menuClass(Tk):
                 self.lb.tag_remove("BOLDUNDER", "sel.first", 'sel.last')
                 self.lb.tag_remove("BOLDITALICS", "sel.first", 'sel.last')
                 self.lb.tag_remove("ITALICSUNDER", "sel.first", 'sel.last')
-                #self.italics = False
             except TclError:
                 pass
         elif (self.bold == False and self.italics == False and self.underlined == True):
@@ -256,7 +240,6 @@ class menuClass(Tk):
                 self.lb.tag_remove("BOLDUNDER", "sel.first", 'sel.last')
                 self.lb.tag_remove("ITALICS", "sel.first", 'sel.last')
                 self.lb.tag_remove("ITALICSUNDER", "sel.first", 'sel.last')
-                #self.underlined = False
             except TclError:
                 pass
         elif (self.bold == True and self.italics == True and self.underlined == False):
@@ -311,7 +294,7 @@ class menuClass(Tk):
                 self.lb.tag_remove("ITALICSUNDER", "sel.first", 'sel.last')
             except TclError:
                 pass
-if __name__ == "__main__":
-    app = menuClass()
-    #menuClass().conditions()
-    app.mainloop()
+if __name__ == "__main__":#main loops that runs constantly.
+	app = menuClass()#creates an object called app which is the menuClass()
+	app.mainloop()#in the app object, call the mainloop() function which will run the program.
+
