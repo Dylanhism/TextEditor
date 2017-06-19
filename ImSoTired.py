@@ -78,18 +78,18 @@ class menuClass(Tk):
         fontsmenu.add_command(label = "24", command = lambda:donothing())
 
 
-		filemenu.add_separator()
+	filemenu.add_separator()
 
-		sizesmenu = Menu(menubar, tearoff = 0)
-		menubar.add_cascade(label = "sizes", menu = sizesmenu)
-		
-		sizesmenu.add_command(label = "8", command = lambda:donothing())
-		sizesmenu.add_command(label = "9", command = lambda:donothing())
-		sizesmenu.add_command(label = "10", command = lambda:donothing())
-		sizesmenu.add_command(label = "11", command = lambda:donothing())
-		sizesmenu.add_command(label = "12", command = lambda:donothing())
-		sizesmenu.add_command(label = "14", command = lambda:donothing())
-		sizesmenu.add_command(label = "18", command = lambda:donothing())
+	sizesmenu = Menu(menubar, tearoff = 0)
+	menubar.add_cascade(label = "sizes", menu = sizesmenu)
+
+	sizesmenu.add_command(label = "8", command = lambda:donothing())
+	sizesmenu.add_command(label = "9", command = lambda:donothing())
+	sizesmenu.add_command(label = "10", command = lambda:donothing())
+	sizesmenu.add_command(label = "11", command = lambda:donothing())
+	sizesmenu.add_command(label = "12", command = lambda:donothing())
+	sizesmenu.add_command(label = "14", command = lambda:donothing())
+	sizesmenu.add_command(label = "18", command = lambda:donothing())
         sizesmenu.add_command(label = "24", command = lambda:donothing())
         
         
