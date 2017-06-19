@@ -61,7 +61,38 @@ class menuClass(Tk):
         menubar.add_cascade(label="Edit", menu=editmenu)
         helpmenu = Menu(menubar, tearoff=0)
         menubar.add_cascade(label="Format", menu=formatmenu)
-                
+        
+        
+        filemenu.add_separator()
+
+        fontsmenu = Menu(menubar, tearoff = 0)
+        menubar.add_cascade(label = "fonts", menu = fontsmenu)
+
+        fontsmenu.add_command(label = "8", command = lambda:donothing())
+        fontsmenu.add_command(label = "9", command = lambda:donothing())
+        fontsmenu.add_command(label = "10", command = lambda:donothing())
+        fontsmenu.add_command(label = "11", command = lambda:donothing())
+        fontsmenu.add_command(label = "12", command = lambda:donothing())
+        fontsmenu.add_command(label = "14", command = lambda:donothing())
+        fontsmenu.add_command(label = "18", command = lambda:donothing())
+        fontsmenu.add_command(label = "24", command = lambda:donothing())
+
+
+		filemenu.add_separator()
+
+		sizesmenu = Menu(menubar, tearoff = 0)
+		menubar.add_cascade(label = "sizes", menu = sizesmenu)
+		
+		sizesmenu.add_command(label = "8", command = lambda:donothing())
+		sizesmenu.add_command(label = "9", command = lambda:donothing())
+		sizesmenu.add_command(label = "10", command = lambda:donothing())
+		sizesmenu.add_command(label = "11", command = lambda:donothing())
+		sizesmenu.add_command(label = "12", command = lambda:donothing())
+		sizesmenu.add_command(label = "14", command = lambda:donothing())
+		sizesmenu.add_command(label = "18", command = lambda:donothing())
+        sizesmenu.add_command(label = "24", command = lambda:donothing())
+        
+        
         Testframe = Frame(self)
         Testframe.pack()
         B = Button(Testframe, text ="B", width = 1, padx = -4, command = lambda:self.bolded())
@@ -85,7 +116,7 @@ class menuClass(Tk):
     
     def donothing(self):
         filewin = Toplevel(root)
-        button = Button(filewin, text = "Do nothing!!")
+        button = Button(filewin, text = "Coming in future updates!!")
         button.pack()
     def getSize(self, number):
         self.textSize = number
