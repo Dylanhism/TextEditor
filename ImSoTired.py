@@ -68,15 +68,9 @@ class menuClass(Tk):
         fontsmenu = Menu(menubar, tearoff = 0)
         menubar.add_cascade(label = "fonts", menu = fontsmenu)
 
-        fontsmenu.add_command(label = "8", command = lambda:donothing())
-        fontsmenu.add_command(label = "9", command = lambda:donothing())
-        fontsmenu.add_command(label = "10", command = lambda:donothing())
-        fontsmenu.add_command(label = "11", command = lambda:donothing())
-        fontsmenu.add_command(label = "12", command = lambda:donothing())
-        fontsmenu.add_command(label = "14", command = lambda:donothing())
-        fontsmenu.add_command(label = "18", command = lambda:donothing())
-        fontsmenu.add_command(label = "24", command = lambda:donothing())
-
+        fontsmenu.add_command(label = "Arial", command = lambda:donothing())
+        fontsmenu.add_command(label = "Times New Roman", command = lambda:donothing())
+        fontsmenu.add_command(label = "Helvetica", command = lambda:donothing())
 
 	filemenu.add_separator()
 
